@@ -6,13 +6,21 @@ Permite a los usuarios registrarse, iniciar sesión, inscribirse a eventos y ver
 
 ---
 
-##  Tecnologías utilizadas
+## Tecnologías utilizadas
 
-- **[FastAPI](https://fastapi.tiangolo.com/)** – Framework principal para la API REST
+### Backend
+
+- **[FastAPI](https://fastapi.tiangolo.com/)** – Framework para construir la API REST
 - **[Pydantic](https://docs.pydantic.dev/)** – Validación de datos
 - **[SQLAlchemy](https://www.sqlalchemy.org/)** – ORM para acceso a base de datos
 - **JWT (JSON Web Tokens)** – Autenticación segura con tokens
-- **Base de datos** – PostgreSQL
+- **PostgreSQL** – Base de datos relacional
+
+### Frontend
+
+- **[Vite](https://vitejs.dev/)** – Herramienta de construcción rápida para proyectos React
+- **[React](https://react.dev/)** – Librería para construir interfaces de usuario
+- **[Material UI (MUI)](https://mui.com/)** – Framework de componentes para un diseño moderno y accesible
 
 ---
 
