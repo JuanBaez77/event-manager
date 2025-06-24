@@ -1,5 +1,6 @@
-from sqlalchemy import Column, Integer, String, Date
-from config.database import Base
+from sqlalchemy import Column, Integer, String, Date, ForeignKey
+from sqlalchemy.orm import relationship
+from config.database import Base  # o db.database según tu proyecto
 
 class EventoDB(Base):
     __tablename__ = "eventos"
@@ -12,7 +13,8 @@ class EventoDB(Base):
     lugar = Column(String, nullable=False)
     cupos = Column(Integer, nullable=False)
 
+    # Clave foránea hacia CategoriaDB
+    categoria_id = Column(Integer, ForeignKey("categorias.id"), nullable=True)
 
-
-
-    # Cuando el fran haga lo de categorias lo puedo/pueden agregar aca
+    # Relación ORM
+    categoria = relationship("CategoriaDB", back_populates="eventos")

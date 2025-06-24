@@ -5,9 +5,9 @@ from sqlalchemy.orm import Session
 from config.database import get_db
 from schemas.eventos import Evento, EventoCreate
 from services import eventos as service
-from middlewares.jwt_bearer import JWTBearer
+#from middlewares.jwt_bearer import JWTBearer
 
-router = APIRouter(prefix="/eventos",tags=["eventos"],dependencies=[Depends(JWTBearer())]
+router = APIRouter(prefix="/eventos",tags=["eventos"],#dependencies=[Depends(JWTBearer())]
 )
 
 @router.get("", response_model=List[Evento], status_code=status.HTTP_200_OK)

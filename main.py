@@ -3,10 +3,10 @@ from fastapi.responses import HTMLResponse
 from config.database import engine, Base
 from middlewares.error_handler import ErrorHandler
 from fastapi.middleware.cors import CORSMiddleware
-from routers.usuarios import router as  usuarios
+#from routers.usuarios import router as  usuarios
 from routers.eventos  import router as eventos
-from routers.inscripciones import router as inscripciones
-from routers.categorías import router as categorias
+#from routers.inscripciones import router as inscripciones
+from routers.categorias import router as categorias
 from fastapi.staticfiles import StaticFiles
 
 
@@ -28,9 +28,9 @@ app.add_middleware(
 )
 
 
-app.include_router(usuarios)
+#app.include_router(usuarios)
 app.include_router(eventos)
-app.include_router(inscripciones)
+#app.include_router(inscripciones)
 app.include_router(categorias)
 
 
