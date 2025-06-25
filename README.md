@@ -30,3 +30,11 @@ Permite a los usuarios registrarse, iniciar sesión, inscribirse a eventos y ver
    ```bash
    git clone https://github.com/tuusuario/event-manager.git
    cd event-manager
+
+2. Inatala los requerimientos
+   ```bash
+   pip install -r requeriments.txt
+
+3. Correr el servidor de la Api
+   ```bash
+   python main.py
