@@ -33,7 +33,7 @@ Permite a los usuarios registrarse, iniciar sesión, inscribirse a eventos y ver
 
 2. Inatala los requerimientos
    ```bash
-   pip install -r requeriments.txt
+   pip install -r requirements.txt
 
 3. Correr el servidor de la Api
    ```bash
