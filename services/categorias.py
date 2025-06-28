@@ -17,3 +17,23 @@ def obtener_categoria(db: Session, categoria_id: int):
 
 def obtener_por_nombre(db: Session, nombre: str):
     return db.query(CategoriaDB).filter_by(nombre=nombre).first()
+
+# Función para actualizar una categoría existente
+def actualizar_categoria(db: Session, categoria_id: int, categoria_data: dict):
+    categoria = db.query(CategoriaDB).filter_by(id=categoria_id).first()
+    if not categoria:
+        return None
+    for key, value in categoria_data.items():
+        setattr(categoria, key, value)
+    db.commit()
+    db.refresh(categoria)
+    return categoria
+
+# Función para eliminar una categoría
+def eliminar_categoria(db: Session, categoria_id: int):
+    categoria = db.query(CategoriaDB).filter_by(id=categoria_id).first()
+    if not categoria:
+        return False
+    db.delete(categoria)
+    db.commit()
+    return True

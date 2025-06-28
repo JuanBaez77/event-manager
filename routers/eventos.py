@@ -27,3 +27,17 @@ async def obtener_evento(evento_id: int, db: Session = Depends(get_db)):
 @router.post("", response_model=Evento, status_code=status.HTTP_201_CREATED)
 async def crear_evento(evento: EventoCreate, db: Session = Depends(get_db)):
     return service.crear_evento(db, evento)
+
+@router.put("/{evento_id}", response_model=Evento, status_code=status.HTTP_200_OK)
+async def actualizar_evento(evento_id: int, evento: dict, db: Session = Depends(get_db)):
+    actualizado = service.actualizar_evento(db, evento_id, evento)
+    if not actualizado:
+        raise HTTPException(status_code=404, detail="Evento no encontrado")
+    return actualizado
+
+@router.delete("/{evento_id}", status_code=status.HTTP_204_NO_CONTENT)
+async def eliminar_evento(evento_id: int, db: Session = Depends(get_db)):
+    eliminado = service.eliminar_evento(db, evento_id)
+    if not eliminado:
+        raise HTTPException(status_code=404, detail="Evento no encontrado")
+    return None
