@@ -5,12 +5,12 @@ from sqlalchemy.orm import Session
 from config.database import get_db
 from schemas.usuarios import UsuarioCreate, UsuarioUpdate, UsuarioResponse, RolUsuario
 from services import usuarios as service
-#from middlewares.jwt_bearer import JWTBearer
+from middlewares.jwt_bearer import JWTBearer
 
 router = APIRouter(
     prefix="/usuarios", 
     tags=["usuarios"],
-    #dependencies=[Depends(JWTBearer())]
+    dependencies=[Depends(JWTBearer())]
 )
 
 @router.get("", response_model=List[UsuarioResponse], status_code=status.HTTP_200_OK)
@@ -57,7 +57,7 @@ async def obtener_usuario(user_id: int, db: Session = Depends(get_db)):
         )
     return user
 
-@router.post("", response_model=UsuarioResponse, status_code=status.HTTP_201_CREATED)
+@router.post("", response_model=UsuarioResponse, status_code=status.HTTP_201_CREATED, dependencies=[])
 async def crear_usuario(usuario: UsuarioCreate, db: Session = Depends(get_db)):
     """Crea un nuevo usuario"""
     return service.create_user(db, usuario)
@@ -70,7 +70,6 @@ async def actualizar_usuario(
 ):
     """Actualiza un usuario existente"""
     return service.update_user(db, user_id, usuario)
-
 
 @router.delete("/{user_id}", status_code=status.HTTP_204_NO_CONTENT)
 async def eliminar_usuario(user_id: int, db: Session = Depends(get_db)):
@@ -91,7 +90,7 @@ async def contar_usuarios(db: Session = Depends(get_db)):
         "clientes": clientes
     }
 
-@router.post("/login", status_code=status.HTTP_200_OK)
+@router.post("/login", status_code=status.HTTP_200_OK, dependencies=[])
 async def login_usuario(
     email: str = Query(..., description="Email del usuario"),
     password: str = Query(..., description="Contraseña del usuario"),

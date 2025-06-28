@@ -7,6 +7,7 @@ from routers.usuarios import router as usuarios
 from routers.eventos  import router as eventos
 #from routers.inscripciones import router as inscripciones
 from routers.categorias import router as categorias
+from routers.auth import router as auth
 from fastapi.staticfiles import StaticFiles
 
 
@@ -32,6 +33,7 @@ app.include_router(usuarios)
 app.include_router(eventos)
 #app.include_router(inscripciones)
 app.include_router(categorias)
+app.include_router(auth)
 
 
 # 1. Servimos todos los archivos estáticos del directorio frontend en la ruta "/" (raíz)
