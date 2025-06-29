@@ -5,10 +5,16 @@ from middlewares.error_handler import ErrorHandler
 from fastapi.middleware.cors import CORSMiddleware
 from routers.usuarios import router as usuarios
 from routers.eventos  import router as eventos
-#from routers.inscripciones import router as inscripciones
+from routers.inscripciones import router as inscripciones
 from routers.categorias import router as categorias
 from routers.auth import router as auth
+from routers.stats import router as stats
 from fastapi.staticfiles import StaticFiles
+## Imports para crear las tablas
+from models.usuarios import UserDB
+from models.eventos import EventoDB
+from models.categorias import CategoriaDB
+from models.inscripciones import InscripcionDB
 
 
 
@@ -31,9 +37,10 @@ app.add_middleware(
 
 app.include_router(usuarios)
 app.include_router(eventos)
-#app.include_router(inscripciones)
+app.include_router(inscripciones)
 app.include_router(categorias)
 app.include_router(auth)
+app.include_router(stats)
 
 
 # 1. Servimos todos los archivos estáticos del directorio frontend en la ruta "/" (raíz)
