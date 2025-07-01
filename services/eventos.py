@@ -53,5 +53,3 @@ def obtener_evento(db: Session, evento_id: int):
     evento = db.query(EventoDB).options(joinedload(EventoDB.categoria)).filter_by(id=evento_id).first()
     return evento
 
-#Esto lo tuve que buscar con chatgpt pq nunca en mi vida hice un service y como vi que el profe lo hace lo meti pero cualquier cosa se borra ns 
-# Le pasa a los mejores agucho AT: AN
