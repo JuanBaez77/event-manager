@@ -7,7 +7,7 @@ class JWTBearer(HTTPBearer):
         auth = await super().__call__(request)
         try:
             data = validate_token(auth.credentials)
-            # Si el token es válido, simplemente permite el acceso
+            # Si el token es válido permite el acceso
             return data
         except Exception:
             raise HTTPException(status_code=403, detail="Credenciales son inválidas")

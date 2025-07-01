@@ -5,9 +5,12 @@ from services.usuarios import authenticate_user
 from utils.jwt_manager import create_token
 from config.database import get_db
 
-router = APIRouter()
+router = APIRouter(
+    prefix="/auth",
+    tags=["Autenticación"]
+)
 
-@router.post("/auth/login")
+@router.post("/login")
 def login(data: LoginRequest, db: Session = Depends(get_db)):
     email = data.email
     password = data.password
