@@ -1,9 +1,20 @@
 from sqlalchemy.orm import Session
 from models.inscripciones import InscripcionDB
 from schemas.inscripciones import InscripcionCreate
+from models.eventos import EventoDB
 
 # Crear una inscripción
 def crear_inscripcion(db: Session, inscripcion: InscripcionCreate):
+    # Obtener el evento
+    evento = db.query(EventoDB).filter_by(id=inscripcion.evento_id).first()
+    if not evento:
+        raise Exception("Evento no encontrado")
+    # Contar inscripciones actuales para ese evento
+    inscriptos = db.query(InscripcionDB).filter_by(evento_id=inscripcion.evento_id).count()
+    # Verificar cupo
+    if inscriptos >= evento.cupos:
+        raise Exception("No hay cupos disponibles para este evento")
+    # Si hay cupo, crear la inscripción
     nueva = InscripcionDB(**inscripcion.dict())
     db.add(nueva)
     db.commit()

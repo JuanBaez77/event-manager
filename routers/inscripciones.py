@@ -29,8 +29,11 @@ async def obtener_inscripcion(inscripcion_id: int, db: Session = Depends(get_db)
 
 @router.post("", response_model=Inscripcion, status_code=status.HTTP_201_CREATED)
 async def crear_inscripcion(inscripcion: InscripcionCreate, db: Session = Depends(get_db)):
-    inscripcion_db = service.crear_inscripcion(db, inscripcion)
-    return Inscripcion.model_validate(inscripcion_db)
+    try:
+        inscripcion_db = service.crear_inscripcion(db, inscripcion)
+        return Inscripcion.model_validate(inscripcion_db)
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
 
 @router.put("/{inscripcion_id}", response_model=Inscripcion, status_code=status.HTTP_200_OK)
 async def actualizar_inscripcion(inscripcion_id: int, inscripcion: dict, db: Session = Depends(get_db)):
